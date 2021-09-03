@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+cat $1| pbcopy && rm $1 && vim $1
