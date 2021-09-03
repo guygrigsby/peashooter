@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/guygrigsby/peashooter/client"
+	"github.com/guygrigsby/peashooter"
 	"github.com/sirupsen/logrus"
 )
 
@@ -17,6 +17,9 @@ func main() {
 	var (
 		concurrency int
 		log         = logrus.New()
+		ctx         = context.Background()
+		uri         = "https://prolifewhistleblower.com"
+		//req := http.NewRequest()
 	)
 	c, err := strconv.ParseInt(os.Getenv("PEASHOOTER_CONCURRENCY"), 10, 16)
 	if err != nil {
@@ -25,6 +28,7 @@ func main() {
 	} else {
 		concurrency = int(c)
 	}
-	client := client.New(context.Background(), "https://prolifewhistleblower.com/anonymous-form/", log.WithField("service", "client"))
-	client.Forever(concurrency)
+	res := peashooter.Fake(ctx, uri, req, concurrency, log)
+	//client := client.New(context.Background(), "https://prolifewhistleblower.com/anonymous-form/", log.WithField("service", "client"))
+	//client.Forever(concurrency)
 }

@@ -8,11 +8,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"time"
 
 	/// "github.com/k4s/webrowser"
 	"github.com/k4s/webrowser"
 	. "github.com/k4s/webrowser"
+	"github.com/sirupsen/logrus"
 )
 
 const (
@@ -39,11 +41,20 @@ func (r *R) GetMethod() string {
 	return r.GetMethod()
 }
 
-func Fake(ctx context.Context, host string, req *http.Request) (*http.Response, error) {
+func Fake(ctx context.Context, host string, req *http.Request, concurrency int, log *logrus.Entry) (*http.Response, error) {
+	p := url.Values := url.
+	req.Header.Add(
+		"Cookie",
+		[]string{
+			"sucuri_cloudproxy_uuid_327f40a69",
+			"480c10943389bbbf60ba675f805948d9",
+		},
+	)
 	data := &Param{
-		Method:       "POST",
-		Url:          site,
-		Header:       http.Header{"Cookie": []string{"your cookie"}},
+		Method: "POST",
+		Url:    site,
+		Header: req.Header,
+		//Header:       http.Header{"Cookie": []string{"your cookie"}},
 		UsePhantomJS: true,
 	}
 	//data.Set("Header" http.Header{"Cookie": []string{"your cookie"}}
