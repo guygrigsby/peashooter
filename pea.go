@@ -1,5 +1,5 @@
 /*
-	Shoot many peas. THey they are shall, but they are many.
+Shoot many peas. THey they are shall, but they are many.
 */
 package peashooter
 
@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-	"time"
 
 	/// "github.com/k4s/webrowser"
 	"github.com/k4s/webrowser"
@@ -21,43 +20,38 @@ const (
 	site = "https://prolifewhistleblower.com"
 )
 
-type P struct {
-	*webrowser.Param
-}
-type R struct {
-	*http.Request
-}
-
-func (r *R) GetConnTimeout() time.Duration {
-	return 600 / time.Millisecond
-}
-func (r *R) GetDialTimeout() time.Duration {
-	return 600 / time.Millisecond
-}
-func (r *R) GetHeader() http.Header {
-	return http.Header{}
-}
-func (r *R) GetMethod() string {
-	return r.GetMethod()
+func FakeValues() string {
+	v := url.Values{}
+	v.Add(
+		"_ga", "GA1.1.1216678778.1630641978",
+	)
+	v.Add(
+		"_ga_M5WWGNMLR8", "GS1.1.1630711553.4.1.1630711738.0",
+	)
+	v.Add(
+		"hustle_module_show_count-social_sharing-1", "11",
+	)
+	v.Add(
+		"sucuri_cloudproxy_uuid_40466e6c3", "349feba0a3b1f9e0d71b82a857e885f",
+	)
+	v.Add(
+		"sucuricp_tfca_6e453141ae697f9f78b18427b4c54df1", "1",
+	)
+	return v.Encode()
 }
 
 func Fake(ctx context.Context, host string, req *http.Request, concurrency int, log *logrus.Entry) (*http.Response, error) {
-	p := url.Values := url.
+
 	req.Header.Add(
 		"Cookie",
-		[]string{
-			"sucuri_cloudproxy_uuid_327f40a69",
-			"480c10943389bbbf60ba675f805948d9",
-		},
+		FakeValues(),
 	)
 	data := &Param{
-		Method: "POST",
-		Url:    site,
-		Header: req.Header,
-		//Header:       http.Header{"Cookie": []string{"your cookie"}},
+		Method:       "POST",
+		Url:          site,
+		Header:       req.Header,
 		UsePhantomJS: true,
 	}
-	//data.Set("Header" http.Header{"Cookie": []string{"your cookie"}}
 
 	browser := webrowser.NewWebrowse()
 	resp, err := browser.Download(data)

@@ -2,10 +2,13 @@ version = 0.0.1
 image = peashooter
 registry = docker.io/guygrigsby
 build = $(image):$(version)
+dev:
+	go run cmd/main.go
 test:
 	go test ./... -v
 
 run: build
+	$GOPATH/src/github.com/k4s/phantomgo/phantomgojs
 	@docker run -it $(registry)/$(build)
 
 .PHONY: build
