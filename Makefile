@@ -3,7 +3,8 @@ image = peashooter
 registry = docker.io/guygrigsby
 build = $(image):$(version)
 dev:
-	go run cmd/main.go
+	go build -o peashooter cmd/main.go
+	./peashooter
 test:
 	go test ./... -v
 
