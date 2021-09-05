@@ -5324,6 +5324,26 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
   <body
     class="home page-template-default page page-id-2 et-tb-has-template et-tb-has-header et-tb-has-footer et_pb_button_helper_class et_cover_background et_pb_gutter windows et_pb_gutters3 et_pb_pagebuilder_layout et_smooth_scroll et_no_sidebar et_divi_theme et-db"
   >
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const loadEl = document.querySelector("#load");
+        firebase.analytics(); // call to activate
+        firebase.performance(); // call to activate
+
+        try {
+          let app = firebase.app();
+          let features = ["analytics", "performance"].filter(
+            (feature) => typeof app[feature] === "function"
+          );
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(
+            ", "
+          )}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = `Error loading firebase: ${e}`;
+        }
+      });
+    </script>
     <div id="page-container">
       <div id="et-boc" class="et-boc">
         <header class="et-l et-l--header">
@@ -5400,8 +5420,6 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                       </div>
-       <input type="submit"/>  
-     </form> 
                       <a
                         class="et_pb_button et_pb_more_button et_pb_button_one"
                         href="https://plannedparenthood.com"
