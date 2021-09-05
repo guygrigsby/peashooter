@@ -1,0 +1,13 @@
+{
+  "name": "peashooter",
+  "version": "1.0.0",
+  "description": "The Peashooter is a copy of https://prolifewhistleblower.com with a bunch of intentiol errors and trolls.",
+  "main": "public/index.html",
+  "repository": "git@github.com:guygrigsby/peashooter.git",
+  "author": "Guy J Grigsby <guy@grigsby.dev>",
+  "license": "GPL",
+  "private": false,
+  "dependencies": {
+    "firebase": "^9.0.1"
+  }
+}
